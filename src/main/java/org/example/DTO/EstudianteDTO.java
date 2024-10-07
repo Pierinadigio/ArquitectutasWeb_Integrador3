@@ -1,5 +1,9 @@
 package org.example.DTO;
 
+import lombok.Data;
+import lombok.Getter;
+
+@Getter
 public class EstudianteDTO {
     private String dni;
     private String nombres;
@@ -18,55 +22,6 @@ public class EstudianteDTO {
         this.numeroLibretaUniversitaria = numeroLibretaUniversitaria;
 
     }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-   public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public String getCiudadResidencia() {
-        return ciudadResidencia;
-    }
-
-    public void setCiudadResidencia(String ciudadResidencia) {
-        this.ciudadResidencia = ciudadResidencia;
-    }
-
-    public String getNumeroLibretaUniversitaria() {
-        return numeroLibretaUniversitaria;
-    }
-
-    public void setNumeroLibretaUniversitaria(String numeroLibretaUniversitaria) {
-        this.numeroLibretaUniversitaria = numeroLibretaUniversitaria;
-    }
-
 
     @Override
     public String toString() {

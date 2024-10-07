@@ -1,7 +1,10 @@
 package org.example.DTO;
 
-import java.util.Map;
+import lombok.Data;
+import lombok.Getter;
 
+import java.util.Map;
+@Getter
 public class ReporteDTO {
     private String nombreCarrera;
     private Map<Integer, Long> inscriptosPorAno;
@@ -12,17 +15,6 @@ public class ReporteDTO {
         this.nombreCarrera = nombre;
         this.inscriptosPorAno = inscriptos;
         this.egresadosPorAno = egresadosPorAno;
-    }
-    public String getNombreCarrera() {
-        return nombreCarrera;
-    }
-
-    public Map<Integer, Long> getInscriptosPorAno() {
-        return inscriptosPorAno;
-    }
-
-    public Map<Integer, Long> getEgresadosPorAno() {
-        return egresadosPorAno;
     }
 
 

@@ -23,5 +23,10 @@ public class CarreraController {
          return carreraService.agregarCarrera(carrera);
     }
 
+    @GetMapping
+    public List<Carrera> listarCarreras() {
+        return carreraService.listarCarreras();
+    }
+
 
 }

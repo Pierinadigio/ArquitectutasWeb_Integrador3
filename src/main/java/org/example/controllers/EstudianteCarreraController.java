@@ -5,11 +5,9 @@ import org.example.DTO.EstudiantesCarreraDTO;
 import org.example.DTO.ReporteDTO;
 import org.example.services.EstudianteCarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,16 +40,10 @@ public class EstudianteCarreraController {
         }
     }
 
-    @GetMapping("/carreras-estudiantes")
-    public ResponseEntity<List<EstudiantesCarreraDTO>> obtenerCarrerasConEstudiantesInscritos() {
-        try {
-            List<EstudiantesCarreraDTO> result = estudianteCarreraService.obtenerCarrerasConEstudiantesInscritos();
-            return ResponseEntity.ok(result);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+    @GetMapping("/carrerasConEstudiantes")
+    public List<EstudiantesCarreraDTO> obtenerCarrerasConEstudiantesInscritos() {
+        return estudianteCarreraService.obtenerCarrerasConEstudiantesInscritos();
     }
-
     @GetMapping("/carrera/{idCarrera}/ciudad/{ciudad}")
     public List<EstudianteDTO> obtenerEstudiantesPorCarreraYCiudad(@PathVariable long idCarrera, @PathVariable String ciudad) {
         return estudianteCarreraService.obtenerEstudiantesPorCarreraYCiudad(idCarrera, ciudad);
