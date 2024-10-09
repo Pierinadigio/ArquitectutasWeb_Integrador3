@@ -1,9 +1,9 @@
-package org.example.controllers;
+package org.example.controller;
 
 import org.example.DTO.EstudianteDTO;
 import org.example.DTO.EstudiantesCarreraDTO;
 import org.example.DTO.ReporteDTO;
-import org.example.services.EstudianteCarreraService;
+import org.example.service.EstudianteCarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +44,7 @@ public class EstudianteCarreraController {
     public List<EstudiantesCarreraDTO> obtenerCarrerasConEstudiantesInscritos() {
         return estudianteCarreraService.obtenerCarrerasConEstudiantesInscritos();
     }
+
     @GetMapping("/carrera/{idCarrera}/ciudad/{ciudad}")
     public List<EstudianteDTO> obtenerEstudiantesPorCarreraYCiudad(@PathVariable long idCarrera, @PathVariable String ciudad) {
         return estudianteCarreraService.obtenerEstudiantesPorCarreraYCiudad(idCarrera, ciudad);

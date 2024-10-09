@@ -1,4 +1,4 @@
-package org.example.services;
+package org.example.service;
 import org.example.DTO.EstudianteDTO;
 import org.example.DTO.EstudiantesCarreraDTO;
 import org.example.DTO.ReporteDTO;
@@ -63,6 +63,7 @@ public class EstudianteCarreraService {
                         e.getDni(),
                         e.getNombres(),
                         e.getApellido(),
+                        e.getEdad(),
                         e.getGenero(),
                         e.getCiudadResidencia(),
                         e.getNumeroLibretaUniversitaria()))

@@ -1,8 +1,7 @@
-package org.example.controllers;
+package org.example.controller;
 import org.example.DTO.EstudianteDTO;
-import org.example.model.Carrera;
 import org.example.model.Estudiante;
-import org.example.services.EstudianteService;
+import org.example.service.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,16 +16,22 @@ public class EstudianteController {
     @Autowired
     private EstudianteService estudianteService;
 
+
     @PostMapping
     public Estudiante AltaEsdudiante(@RequestBody Estudiante estudiante) {
         return estudianteService.agregarEstudiante(estudiante);
     }
 
-
-    @GetMapping
-    public List<EstudianteDTO> listarEstudiantesOrdenados(@RequestParam(required = false) String ordenPor) {
-        return estudianteService.listarEstudiantesOrdenados(ordenPor);
+    @PostMapping("/agregar")
+    public List<Estudiante> agregarEstudiantes(@RequestBody List<Estudiante> estudiantes) {
+        return estudianteService.agregarEstudiantes(estudiantes);
     }
+
+   // Lista Estudiantes ORDENADOS por algún criterio: "apellido", "nombre", "libreta", "edad", "ciudad" o "dni"
+   @GetMapping
+   public List<EstudianteDTO> listarEstudiantesOrdenados(@RequestParam (required = false, defaultValue = "dni") String ordenPor){
+       return estudianteService.listarEstudiantesOrdenados(ordenPor);
+   }
 
     @GetMapping("/{numeroLibreta}")
     public EstudianteDTO obtenerEstudiantePorLibreta(@PathVariable String numeroLibreta) {

@@ -1,12 +1,9 @@
-package org.example.controllers;
+package org.example.controller;
 
-import org.example.DTO.EstudiantesCarreraDTO;
 import org.example.model.Carrera;
 import org.example.model.Estudiante;
-import org.example.services.CarreraService;
-import org.example.services.EstudianteService;
+import org.example.service.CarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +18,11 @@ public class CarreraController {
     @PostMapping
     public Carrera agregarCarrera(@RequestBody Carrera carrera) {
          return carreraService.agregarCarrera(carrera);
+    }
+
+    @PostMapping("/agregar")
+    public List<Carrera> agregarCarreras(@RequestBody List<Carrera> carreras) {
+        return carreraService.agregarCarreras(carreras);
     }
 
     @GetMapping

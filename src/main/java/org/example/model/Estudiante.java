@@ -11,7 +11,7 @@ import java.util.*;
 @Data
 public class Estudiante  {
     @jakarta.persistence.Id
-    @Column(name = "dni", nullable = false, unique = true)
+    @Column(name = "dniEstudiante", nullable = false, unique = true)
     private String dni;
 
     private String nombres;

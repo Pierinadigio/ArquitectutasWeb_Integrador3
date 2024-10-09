@@ -1,4 +1,4 @@
-package org.example.configuraciones;
+package org.example.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;

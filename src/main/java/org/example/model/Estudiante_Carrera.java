@@ -32,7 +32,7 @@ public class Estudiante_Carrera {
 
     public int calcularAntiguedad() {
         if (fechaInscripcion == null) {
-            return 0; // o lanzar una excepción según tu caso
+            return 0;
         }
         long diferenciaMillis = new Date().getTime() - fechaInscripcion.getTime();
         long diferenciaDias = TimeUnit.DAYS.convert(diferenciaMillis, TimeUnit.MILLISECONDS);
