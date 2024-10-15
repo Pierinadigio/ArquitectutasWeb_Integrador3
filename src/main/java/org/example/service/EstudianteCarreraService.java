@@ -71,29 +71,36 @@ public class EstudianteCarreraService {
     }
 
 
+public List<ReporteDTO> generarReporteCarreras() {
+    List<Object[]> resultados = estudianteCarreraRepository.countInscriptosYEgresadosPorCarrera();
+    Map<String, Map<Integer, Long[]>> reportesMap = new HashMap<>();
 
-    public List<ReporteDTO> generarReporteCarreras() {
-        List<Carrera> carreras = carreraRepository.findAll();
-        List<ReporteDTO> reportes = new ArrayList<>();
+    for (Object[] resultado : resultados) {
+        String nombreCarrera = (String) resultado[0];
+        int año = (Integer) resultado[1];
+        long totalInscriptos = (Long) resultado[2];
+        long totalEgresados = (Long) resultado[3];
 
-        for (Carrera carrera : carreras) {
-           List<Object[]> resultados = estudianteCarreraRepository.countInscriptosYEgresadosPorAnio(carrera.getId());
-
-           Map<Integer, Long> inscriptosPorAno = resultados.stream()
-                    .collect(Collectors.toMap(
-                            e -> (Integer) e[0],
-                            e -> (Long) e[1]
-                    ));
-
-            Map<Integer, Long> egresadosPorAno = resultados.stream()
-                    .collect(Collectors.toMap(
-                            e -> (Integer) e[0],
-                            e -> (Long) e[2]
-                    ));
-            reportes.add(new ReporteDTO(carrera.getNombre(), inscriptosPorAno, egresadosPorAno));
-        }
-
-        return reportes;
+        reportesMap
+                .computeIfAbsent(nombreCarrera, k -> new HashMap<>())
+                .put(año, new Long[]{totalInscriptos, totalEgresados});
     }
 
+    List<ReporteDTO> reportes = new ArrayList<>();
+    for (Map.Entry<String, Map<Integer, Long[]>> entry : reportesMap.entrySet()) {
+        String nombreCarrera = entry.getKey();
+        Map<Integer, Long[]> añosData = entry.getValue();
+        Map<Integer, Long> inscriptosPorAno = new HashMap<>();
+        Map<Integer, Long> egresadosPorAno = new HashMap<>();
+
+        for (Map.Entry<Integer, Long[]> añoEntry : añosData.entrySet()) {
+            inscriptosPorAno.put(añoEntry.getKey(), añoEntry.getValue()[0]);
+            egresadosPorAno.put(añoEntry.getKey(), añoEntry.getValue()[1]);
+        }
+        reportes.add(new ReporteDTO(nombreCarrera, inscriptosPorAno, egresadosPorAno));
+    }
+    reportes.sort(Comparator.comparing(ReporteDTO::getNombreCarrera));
+
+    return reportes;
+}
 }

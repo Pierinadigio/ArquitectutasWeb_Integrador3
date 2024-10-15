@@ -27,13 +27,13 @@ public interface EstudianteCarreraRepository extends JpaRepository<Estudiante_Ca
 
 
     // Genera reporte de carreras con estudiantes inscriptos y egresados por año
-   @Query("SELECT YEAR(ec.fechaInscripcion) AS año, " +
+    @Query("SELECT c.nombre, YEAR(ec.fechaInscripcion), " +
             "COUNT(ec) AS totalInscriptos, " +
             "SUM(CASE WHEN ec.isGraduado = true THEN 1 ELSE 0 END) AS totalEgresados " +
-            "FROM Estudiante_Carrera ec " +
-            "WHERE ec.carrera.id = :idCarrera " +
-            "GROUP BY YEAR(ec.fechaInscripcion) " +
-            "ORDER BY YEAR(ec.fechaInscripcion)")
-    List<Object[]> countInscriptosYEgresadosPorAnio(@Param("idCarrera") long idCarrera);
-}
+            "FROM Carrera c " +
+            "LEFT JOIN Estudiante_Carrera ec ON ec.carrera.id = c.id " +
+            "GROUP BY c.nombre, YEAR(ec.fechaInscripcion) " +
+            "ORDER BY c.nombre, YEAR(ec.fechaInscripcion)")
+    List<Object[]> countInscriptosYEgresadosPorCarrera();
 
+}
